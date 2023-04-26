@@ -20,14 +20,6 @@ public class EventController {
         this.eventRepository = eventRepository;
     }
 
-//    @GetMapping("/")
-//    public String home() {
-//        for (Event event : eventRepository.findAll()) {
-//            log.debug("event {}", event.getName());
-//        }
-//        return "home";
-//    }
-
     @GetMapping("/")
     public String showCurrentEvents(Model model, @RequestParam(defaultValue = "0") int page) {
         int pageSize = 20;

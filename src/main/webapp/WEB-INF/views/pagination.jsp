@@ -1,22 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--<div class="pagination">--%>
-<%--    Strona ${currentPage + 1} z ${totalPages}<br>--%>
-<%--    <c:if test="${currentPage > 0}">--%>
-<%--        <a href="<c:url value="${paginationUrl}">--%>
-<%--            <c:param name="page" value="${currentPage - 1}" />--%>
-<%--            <c:param name="size" value="${pageSize}" />--%>
-<%--        </c:url>">&laquo; Poprzednia strona</a>--%>
-<%--    </c:if>--%>
-<%--    <c:if test="${currentPage < totalPages - 1}">--%>
-<%--        <a href="<c:url value="${paginationUrl}">--%>
-<%--            <c:param name="page" value="${currentPage + 1}" />--%>
-<%--            <c:param name="size" value="${pageSize}" />--%>
-<%--        </c:url>">Następna strona &raquo;</a>--%>
-<%--    </c:if>--%>
-<%--</div>--%>
-
 <div class="pagination">
     Strona ${currentPage + 1} z ${totalPages}<br>
     <c:if test="${currentPage > 0}">

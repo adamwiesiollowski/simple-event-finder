@@ -15,7 +15,4 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
     @Query("SELECT p FROM Place p ORDER BY p.city ASC, p.name ASC")
     List<Place> findAllPlacesOrderedByCityFormMyMethod();
 
-//    @Query("SELECT p FROM Place p WHERE p.name =?1 AND p.city =?2")
-//    Optional<Place> findPlacesByNameAndCityMyMethod(String name, String city);
-
 }
