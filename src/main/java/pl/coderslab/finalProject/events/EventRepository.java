@@ -17,12 +17,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Page<Event> findFutureOrPresentEventsMyMethod(Pageable pageable);
 
     @Query("SELECT e FROM Event e " +
-            "WHERE (e.dateBeginning < CURRENT_DATE AND e.dateEnd IS NULL) " +
-            "OR (e.dateBeginning < CURRENT_DATE AND e.dateEnd < CURRENT_DATE) " +
-            "ORDER BY e.dateBeginning DESC, e.dateEnd DESC, e.name ASC")
-    Page<Event> findPastEventsMyMethod(Pageable pageable);
-
-    @Query("SELECT e FROM Event e " +
             "WHERE (e.dateBeginning >= CURRENT_DATE OR e.dateEnd >= CURRENT_DATE) " +
             "AND e.category.id = ?1 ORDER BY e.dateBeginning ASC, e.dateEnd ASC, e.name ASC")
     Page<Event> findEventsByCategoryIdMyMethod(Long id, Pageable pageable);
@@ -37,37 +31,46 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Query("SELECT e FROM Event e " +
             "WHERE e.name=?1 " +
-            "AND (e.dateBeginning >= CURRENT_DATE or e.dateEnd >= CURRENT_DATE) " +
+            "AND (e.dateBeginning >= CURRENT_DATE OR e.dateEnd >= CURRENT_DATE) " +
             "ORDER BY e.dateBeginning ASC, e.dateEnd ASC, e.name ASC")
     Page<Event> findEventsByNameMyMethod(String name, Pageable pageable);
 
     @Query("SELECT e FROM Event e JOIN e.place p " +
             "WHERE p.city=?1 " +
-            "AND (e.dateBeginning >= CURRENT_DATE or e.dateEnd >= CURRENT_DATE) " +
+            "AND (e.dateBeginning >= CURRENT_DATE OR e.dateEnd >= CURRENT_DATE) " +
             "ORDER BY e.dateBeginning ASC, e.dateEnd ASC, e.name ASC")
     Page<Event> findEventsByPlaceCityMyMethod(String city, Pageable pageable);
 
     @Query("SELECT e FROM Event e JOIN e.place p " +
             "WHERE p.name=?1 AND p.city=?2 " +
-            "AND (e.dateBeginning >= CURRENT_DATE or e.dateEnd >= CURRENT_DATE) " +
+            "AND (e.dateBeginning >= CURRENT_DATE OR e.dateEnd >= CURRENT_DATE) " +
             "ORDER BY e.dateBeginning ASC, e.dateEnd ASC, e.name ASC")
     Page<Event> findEventsByPlaceNameMyMethod(String name, String city, Pageable pageable);
 
+    @Query("SELECT e FROM Event e " +
+            "WHERE (e.dateBeginning < CURRENT_DATE AND e.dateEnd IS NULL) " +
+            "OR (e.dateBeginning < CURRENT_DATE AND e.dateEnd < CURRENT_DATE) " +
+            "ORDER BY e.dateBeginning DESC, e.dateEnd DESC, e.name ASC")
+    Page<Event> findPastEventsMyMethod(Pageable pageable);
+
         @Query("SELECT e FROM Event e " +
             "WHERE e.name=?1 " +
-            "AND (e.dateBeginning < CURRENT_DATE or e.dateEnd < CURRENT_DATE) " +
+                "AND ((e.dateBeginning < CURRENT_DATE AND e.dateEnd IS NULL) " +
+                "OR (e.dateBeginning < CURRENT_DATE AND e.dateEnd < CURRENT_DATE)) " +
             "ORDER BY e.dateBeginning DESC, e.dateEnd DESC, e.name ASC")
     Page<Event> findPastEventsByNameMyMethod(String name, Pageable pageable);
 
     @Query("SELECT e FROM Event e JOIN e.place p " +
             "WHERE p.city=?1 " +
-            "AND (e.dateBeginning < CURRENT_DATE or e.dateEnd < CURRENT_DATE) " +
+            "AND ((e.dateBeginning < CURRENT_DATE AND e.dateEnd IS NULL) " +
+            "OR (e.dateBeginning < CURRENT_DATE AND e.dateEnd < CURRENT_DATE)) " +
             "ORDER BY e.dateBeginning DESC, e.dateEnd DESC, e.name ASC")
     Page<Event> findPastEventsByPlaceCityMyMethod(String city, Pageable pageable);
 
     @Query("SELECT e FROM Event e JOIN e.place p " +
             "WHERE p.name=?1 AND p.city=?2 " +
-            "AND (e.dateBeginning < CURRENT_DATE or e.dateEnd < CURRENT_DATE) " +
+            "AND ((e.dateBeginning < CURRENT_DATE AND e.dateEnd IS NULL) " +
+            "OR (e.dateBeginning < CURRENT_DATE AND e.dateEnd < CURRENT_DATE)) " +
             "ORDER BY e.dateBeginning DESC, e.dateEnd DESC, e.name ASC")
     Page<Event> findPastEventsByPlaceNameMyMethod(String name, String city, Pageable pageable);
 
